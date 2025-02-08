@@ -1,4 +1,4 @@
-import { add, subtract } from "./function";
+import add, { subtract } from "./function";
 
 const result = add(1, 2) + 0;
 const result2 = subtract(1, 2) + 0;
