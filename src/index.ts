@@ -1,2 +1,2 @@
-let x: number = 10;
+let x: number | string = 10;
 x = "hello";
