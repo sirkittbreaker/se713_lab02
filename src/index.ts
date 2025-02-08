@@ -1,5 +1,6 @@
 const add = (a: number, b: number): string => {
-  return a + b;
+  const result = a + b;
+  return result.toString();
 };
 
 const result = add(1, 2) + 0;
