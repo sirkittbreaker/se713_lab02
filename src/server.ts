@@ -102,10 +102,15 @@ app.get("/test", (req: Request, res: Response) => {
   res.send(output);
 });
 app.get("/events", (req: Request, res: Response) => {
-  const category = req.query.category;
-  const filteredEvents = events.filter((event) => event.category === category);
-
-  res.send(filteredEvents);
+  if (req.query.category) {
+    const category = req.query.category;
+    const filteredEvents = events.filter(
+      (event) => event.category === category
+    );
+    res.json(filteredEvents);
+  } else {
+    res.json(events);
+  }
 });
 
 app.listen(port, () => {
