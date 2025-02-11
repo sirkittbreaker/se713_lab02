@@ -121,6 +121,12 @@ app.get("/events/:id", (req: Request, res: Response) => {
     res.status(404).send("Event not found");
   }
 });
+app.post("/events", (req: Request, res: Response) => {
+  const newEvent: Event = req.body;
+  newEvent.id = events.length + 1;
+  events.push(newEvent);
+  res.json(newEvent);
+});
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);
