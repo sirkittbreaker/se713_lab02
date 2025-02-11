@@ -8,12 +8,17 @@ app.get("/", (req: Request, res: Response) => {
 });
 app.get("/test", (req: Request, res: Response) => {
   //   res.send("Hello World! 3");
-  let returnObj = {
-    name: "test",
-    age: 20,
-    address: "Thai",
-  };
-  res.send(returnObj);
+
+  //   let returnObj = {
+  //     name: "test",
+  //     age: 20,
+  //     address: "Thai",
+  //   };
+  //   res.send(returnObj);
+
+  const id = req.query.id;
+  const output = `id: ${id}`;
+  res.send(output);
 });
 
 app.listen(port, () => {
