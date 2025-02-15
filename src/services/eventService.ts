@@ -79,22 +79,22 @@ const events: Event[] = [
   },
 ];
 
-export function getEventByCategory(category: string): Event[] {
+export function getEventByCategory(category: string): Promise<Event[]> {
   const filteredEvents = events.filter((event) => event.category === category);
-  return filteredEvents;
+  return Promise.resolve(filteredEvents);
 }
 
-export function getAllEvents(): Event[] {
-  return events;
+export function getAllEvents(): Promise<Event[]> {
+  return Promise.resolve(events);
 }
 
-export function getEventById(id: number): Event | undefined {
+export function getEventById(id: number): Promise<Event | undefined> {
   const event = events.find((event) => event.id === id);
-  return event;
+  return Promise.resolve(event);
 }
 
-export function addEvent(newEvent: Event): Event {
+export function addEvent(newEvent: Event): Promise<Event> {
   newEvent.id = events.length + 1;
   events.push(newEvent);
-  return newEvent;
+  return Promise.resolve(newEvent);
 }
