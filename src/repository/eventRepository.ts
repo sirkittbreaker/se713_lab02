@@ -1,4 +1,4 @@
-import type { Event } from "../model/event.ts";
+import type { Event } from "../model/event";
 
 const events: Event[] = [
   {

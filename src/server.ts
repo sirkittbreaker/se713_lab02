@@ -4,7 +4,6 @@ import {
   getEventByCategory,
   getEventById,
   addEvent,
-  Event,
 } from "./services/eventService";
 
 const app = express();
