@@ -29,32 +29,32 @@ app.get("/test", (req: Request, res: Response) => {
   const output = `id: ${id}`;
   res.send(output);
 });
-app.get("/events", (req: Request, res: Response) => {
+app.get("/events", async (req: Request, res: Response) => {
   if (req.query.category) {
     const category = req.query.category;
-    const filteredEvents = getEventByCategory(category as string);
+    const filteredEvents = await getEventByCategory(category as string);
     res.json(filteredEvents);
   } else {
-    res.json(getAllEvents());
+    res.json(await getAllEvents());
   }
 });
-app.get("/events/:id", (req: Request, res: Response) => {
+app.get("/events/:id", async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
-  const event = getEventById(id);
+  const event = await getEventById(id);
   if (event) {
     res.json(event);
   } else {
     res.status(404).send("Event not found");
   }
 });
-app.post("/events", (req: Request, res: Response) => {
+app.post("/events", async (req: Request, res: Response) => {
   const newEvent = req.body;
-  addEvent(newEvent);
+  await addEvent(newEvent);
   res.json(newEvent);
 });
-app.put("/events/:id", (req: Request, res: Response) => {
+app.put("/events/:id", async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
-  const event = getEventById(id);
+  const event = await getEventById(id);
   if (event) {
     Object.assign(event, req.body);
     res.json(event);
