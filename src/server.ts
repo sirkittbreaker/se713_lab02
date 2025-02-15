@@ -8,6 +8,9 @@ import {
 } from "./services/eventService";
 import multer from "multer";
 import { uploadFile } from "./services/uploadFileService";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 const port = 3000;
@@ -74,8 +77,12 @@ app.post("/upload", upload.single("file"), async (req: any, res: any) => {
       return res.status(400).send("No file uploaded.");
     }
 
-    const bucket = "images";
-    const filePath = `uploads`;
+    const bucket = process.env.SUPABASE_BUCKET_NAME!;
+    const filePath = process.env.UPLOAD_DIR!;
+
+    if (!bucket || !filePath) {
+      return res.status(500).send("Bucket name or file path not configured");
+    }
 
     const outputUrl = await uploadFile(bucket, filePath, file);
     res.status(200).send(outputUrl);
