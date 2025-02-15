@@ -86,6 +86,26 @@ const events: Event[] = [
   },
 ];
 
+function getEventByCategory(category: string): Event[] {
+  const filteredEvents = events.filter((event) => event.category === category);
+  return filteredEvents;
+}
+
+function getAllEvents(): Event[] {
+  return events;
+}
+
+function getEventById(id: number): Event | undefined {
+  const event = events.find((event) => event.id === id);
+  return event;
+}
+
+function addEvent(newEvent: Event): Event {
+  newEvent.id = events.length + 1;
+  events.push(newEvent);
+  return newEvent;
+}
+
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
@@ -106,17 +126,15 @@ app.get("/test", (req: Request, res: Response) => {
 app.get("/events", (req: Request, res: Response) => {
   if (req.query.category) {
     const category = req.query.category;
-    const filteredEvents = events.filter(
-      (event) => event.category === category
-    );
+    const filteredEvents = getEventByCategory(category as string);
     res.json(filteredEvents);
   } else {
-    res.json(events);
+    res.json(getAllEvents());
   }
 });
 app.get("/events/:id", (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
-  const event = events.find((event) => event.id === id);
+  const event = getEventById(id);
   if (event) {
     res.json(event);
   } else {
@@ -125,8 +143,7 @@ app.get("/events/:id", (req: Request, res: Response) => {
 });
 app.post("/events", (req: Request, res: Response) => {
   const newEvent: Event = req.body;
-  newEvent.id = events.length + 1;
-  events.push(newEvent);
+  addEvent(newEvent);
   res.json(newEvent);
 });
 app.put("/events/:id", (req: Request, res: Response) => {
