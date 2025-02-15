@@ -4,6 +4,7 @@ import {
   getEventByCategory,
   getEventById,
   addEvent,
+  updateEvent,
 } from "./services/eventService";
 
 const app = express();
@@ -55,8 +56,9 @@ app.put("/events/:id", async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   const event = await getEventById(id);
   if (event) {
-    Object.assign(event, req.body);
-    res.json(event);
+    await updateEvent(id, req.body); // เรียกใช้ updateEvent
+    const updatedEvent = await getEventById(id); // ดึงข้อมูลเหตุการณ์ที่อัปเดตแล้ว
+    res.json(updatedEvent);
   } else {
     res.status(404).send("Event not found");
   }

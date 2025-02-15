@@ -1,5 +1,6 @@
 import type { Event } from "../model/event";
-import * as repo from "../repository/eventRepository";
+// import * as repo from "../repository/eventRepository";
+import * as repo from "../repository/eventRepositoryDb";
 
 export function getEventByCategory(category: string): Promise<Event[]> {
   return repo.getEventByCategory(category);
@@ -15,4 +16,11 @@ export function getEventById(id: number): Promise<Event | undefined> {
 
 export function addEvent(newEvent: Event): Promise<Event> {
   return repo.addEvent(newEvent);
+}
+
+export function updateEvent(
+  id: number,
+  updatedEvent: Partial<Event>
+): Promise<void> {
+  return repo.updateEvent(id, updatedEvent);
 }
