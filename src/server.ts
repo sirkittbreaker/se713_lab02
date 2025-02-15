@@ -8,7 +8,7 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use("/", eventRoute);
+app.use("/events", eventRoute);
 const port = 3000;
 
 const upload = multer({ storage: multer.memoryStorage() });

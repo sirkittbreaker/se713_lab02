@@ -6,10 +6,11 @@ import {
   addEvent,
   updateEvent,
 } from "../services/eventService";
+import exp from "constants";
 
 const router = Router();
 
-router.get("/events", async (req: Request, res: Response) => {
+router.get("/", async (req: Request, res: Response) => {
   if (req.query.category) {
     const category = req.query.category;
     const filteredEvents = await getEventByCategory(category as string);
@@ -19,7 +20,7 @@ router.get("/events", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/events/:id", async (req: Request, res: Response) => {
+router.get("/:id", async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   const event = await getEventById(id);
   if (event) {
@@ -29,13 +30,13 @@ router.get("/events/:id", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/events", async (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => {
   const newEvent = req.body;
   await addEvent(newEvent);
   res.json(newEvent);
 });
 
-router.put("/events/:id", async (req: Request, res: Response) => {
+router.put("/:id", async (req: Request, res: Response) => {
   const id = parseInt(req.params.id);
   const event = await getEventById(id);
   if (event) {
