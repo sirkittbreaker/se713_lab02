@@ -6,29 +6,33 @@ import {
   addEvent,
   updateEvent,
 } from "./services/eventService";
+import multer from "multer";
+import { uploadFile } from "./services/uploadFileService";
 
 const app = express();
 const port = 3000;
+
+const upload = multer({ storage: multer.memoryStorage() });
 
 app.use(express.json());
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
-app.get("/test", (req: Request, res: Response) => {
-  //   res.send("Hello World! 3");
+// app.get("/test", (req: Request, res: Response) => {
+//   //   res.send("Hello World! 3");
 
-  //   let returnObj = {
-  //     name: "test",
-  //     age: 20,
-  //     address: "Thai",
-  //   };
-  //   res.send(returnObj);
+//   //   let returnObj = {
+//   //     name: "test",
+//   //     age: 20,
+//   //     address: "Thai",
+//   //   };
+//   //   res.send(returnObj);
 
-  const id = req.query.id;
-  const output = `id: ${id}`;
-  res.send(output);
-});
+//   const id = req.query.id;
+//   const output = `id: ${id}`;
+//   res.send(output);
+// });
 app.get("/events", async (req: Request, res: Response) => {
   if (req.query.category) {
     const category = req.query.category;
@@ -61,6 +65,23 @@ app.put("/events/:id", async (req: Request, res: Response) => {
     res.json(updatedEvent);
   } else {
     res.status(404).send("Event not found");
+  }
+});
+app.post("/upload", upload.single("file"), async (req: any, res: any) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res.status(400).send("No file uploaded.");
+    }
+
+    const bucket = "images";
+    const filePath = `uploads/${file.originalname}`;
+
+    await uploadFile(bucket, filePath, file);
+
+    res.status(200).send("File uploaded successfully");
+  } catch (error) {
+    res.status(500).send("Error uploading file");
   }
 });
 
