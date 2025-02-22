@@ -61,7 +61,11 @@ export function updateEvent(
 export function getAllEventsWithOrganizer(): Promise<Event[]> {
   return prisma.event.findMany({
     include: {
-      organizer: true,
+      organizer: {
+        select: {
+          name: true,
+        },
+      },
     },
   });
 }
