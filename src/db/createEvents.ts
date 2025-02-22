@@ -11,7 +11,7 @@ export async function createEvents() {
       location: "London",
       date: "2021-07-01",
       time: "19:00",
-      petsAllowed: false,
+      petAllowed: false,
       organizer: "Live Nation",
     },
     {
@@ -21,7 +21,7 @@ export async function createEvents() {
       location: "Manchester",
       date: "2021-07-15",
       time: "12:00",
-      petsAllowed: true,
+      petAllowed: true,
       organizer: "Festival Republic",
     },
     {
@@ -31,7 +31,7 @@ export async function createEvents() {
       location: "Liverpool",
       date: "2021-08-01",
       time: "15:00",
-      petsAllowed: false,
+      petAllowed: false,
       organizer: "Premier League",
     },
     {
@@ -41,7 +41,7 @@ export async function createEvents() {
       location: "New Orleans",
       date: "2021-09-10",
       time: "19:00",
-      petsAllowed: true,
+      petAllowed: true,
       organizer: "Jazz Fest",
     },
     {
@@ -51,7 +51,7 @@ export async function createEvents() {
       location: "Central Park",
       date: "2021-10-05",
       time: "18:00",
-      petsAllowed: false,
+      petAllowed: false,
       organizer: "NYC Theatre Group",
     },
     {
@@ -61,7 +61,7 @@ export async function createEvents() {
       location: "San Francisco",
       date: "2021-11-20",
       time: "12:00",
-      petsAllowed: true,
+      petAllowed: true,
       organizer: "Foodie Events",
     },
   ];
@@ -75,7 +75,7 @@ export async function createEvents() {
         location: event.location,
         date: event.date,
         time: event.time,
-        petsAllowed: event.petsAllowed,
+        petAllowed: event.petAllowed,
         organizer: event.organizer,
       },
     });

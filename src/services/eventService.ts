@@ -1,26 +1,24 @@
 import type { Event } from "../model/event";
 // import * as repo from "../repository/eventRepository";
-import * as repo from "../repository/eventRepositoryDb";
+// import * as repo from "../repository/eventRepositoryDb";
+import * as repo from "../repository/eventRepositoryPrisma";
 
-export function getEventByCategory(category: string): Promise<Event[]> {
+export function getEventByCategory(category: string) {
   return repo.getEventByCategory(category);
 }
 
-export function getAllEvents(): Promise<Event[]> {
+export function getAllEvents() {
   return repo.getAllEvents();
 }
 
-export function getEventById(id: number): Promise<Event | undefined> {
+export function getEventById(id: number) {
   return repo.getEventById(id);
 }
 
-export function addEvent(newEvent: Event): Promise<Event> {
+export function addEvent(newEvent: Event) {
   return repo.addEvent(newEvent);
 }
 
-export function updateEvent(
-  id: number,
-  updatedEvent: Partial<Event>
-): Promise<void> {
+export function updateEvent(id: number, updatedEvent: Partial<Event>) {
   return repo.updateEvent(id, updatedEvent);
 }

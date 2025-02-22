@@ -21,6 +21,6 @@ model event {
   location    String
   date        String
   time        String
-  petsAllowed Boolean
+  petAllowed  Boolean
   organizer   String
 }
