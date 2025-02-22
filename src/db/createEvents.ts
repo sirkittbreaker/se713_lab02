@@ -12,7 +12,6 @@ export async function createEvents() {
       date: "2021-07-01",
       time: "19:00",
       petAllowed: false,
-      organizer: "Live Nation",
     },
     {
       category: "Music",
@@ -22,7 +21,6 @@ export async function createEvents() {
       date: "2021-07-15",
       time: "12:00",
       petAllowed: true,
-      organizer: "Festival Republic",
     },
     {
       category: "Sports",
@@ -32,7 +30,6 @@ export async function createEvents() {
       date: "2021-08-01",
       time: "15:00",
       petAllowed: false,
-      organizer: "Premier League",
     },
     {
       category: "Music",
@@ -42,7 +39,6 @@ export async function createEvents() {
       date: "2021-09-10",
       time: "19:00",
       petAllowed: true,
-      organizer: "Jazz Fest",
     },
     {
       category: "Theatre",
@@ -52,7 +48,6 @@ export async function createEvents() {
       date: "2021-10-05",
       time: "18:00",
       petAllowed: false,
-      organizer: "NYC Theatre Group",
     },
     {
       category: "Food",
@@ -62,7 +57,6 @@ export async function createEvents() {
       date: "2021-11-20",
       time: "12:00",
       petAllowed: true,
-      organizer: "Foodie Events",
     },
   ];
 
@@ -76,7 +70,6 @@ export async function createEvents() {
         date: event.date,
         time: event.time,
         petAllowed: event.petAllowed,
-        organizer: event.organizer,
       },
     });
   }
