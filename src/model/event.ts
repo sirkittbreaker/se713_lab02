@@ -1,4 +1,5 @@
-import { organizer } from "./organizer";
+import { Organizer } from "./organizer";
+import { Participant } from "./participant";
 
 export interface Event {
   id?: number;
@@ -10,5 +11,6 @@ export interface Event {
   time?: string;
   petAllowed?: boolean;
   organizerId?: number | null;
-  organizer?: organizer | null;
+  organizer?: Organizer | null;
+  participants?: Participant[];
 }

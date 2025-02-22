@@ -1,7 +1,8 @@
 import type { Event } from "./event";
 
-export type Organizer = {
+export interface Participant {
   id?: number;
   name: string;
-  event?: Event[];
-};
+  email: string;
+  events: Event[];
+}

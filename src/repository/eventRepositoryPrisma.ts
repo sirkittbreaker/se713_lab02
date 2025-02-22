@@ -56,6 +56,13 @@ export function updateEvent(
       organizer: updatedEvent.organizer
         ? { connect: { id: updatedEvent.organizer.id } }
         : undefined,
+      participants: updatedEvent.participants
+        ? {
+            set: updatedEvent.participants.map((participant) => ({
+              id: participant.id,
+            })),
+          }
+        : undefined,
     },
   });
 }
@@ -69,6 +76,14 @@ export function getAllEventsWithOrganizer(): Promise<Event[]> {
       organizer: {
         select: {
           name: true,
+        },
+      },
+      participants: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          events: true,
         },
       },
     },
