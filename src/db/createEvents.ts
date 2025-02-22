@@ -91,5 +91,25 @@ export async function createEvents() {
     },
   });
 
+  const responseEvents = await prisma.event.findMany();
+
+  await prisma.event.update({
+    where: { id: responseEvents[0].id },
+    data: {
+      organizer: {
+        connect: {
+          id: chiangMaiOrg.id,
+        },
+      },
+    },
+  });
+
+  const responseEvents2 = await prisma.event.findMany({
+    include: {
+      organizer: true,
+    },
+  });
+  console.log(responseEvents2);
+
   console.log("Database has been initialized with events");
 }
