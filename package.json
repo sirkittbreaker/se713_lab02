@@ -6,8 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/index.js",
     "build": "tsc",
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
-    "seed": "npx ts-node src/seed.ts"
+    "dev": "nodemon",
+    "seed": "ts-node src/seed.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,9 +16,9 @@
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.1",
+    "nodemon": "^3.1.9",
     "prisma": "^6.4.1",
     "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
     "tsx": "^4.19.3",
     "typescript": "^5.7.3"
   },
