@@ -14,7 +14,7 @@ datasource db {
 }
 
 model event {
-  id          Int     @id @default(autoincrement())
+  id          Int        @id @default(autoincrement())
   category    String
   title       String
   description String
@@ -22,5 +22,12 @@ model event {
   date        String
   time        String
   petAllowed  Boolean
-  organizer   String
+  organizerId Int?
+  organizer   organizer? @relation(fields: [organizerId], references: [id])
+}
+
+model organizer {
+  id     Int     @id @default(autoincrement())
+  name   String
+  events event[]
 }
