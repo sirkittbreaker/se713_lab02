@@ -20,8 +20,10 @@ export function getEventById(id: number): Promise<Event | null> {
     where: {
       id: id,
     },
-    include: {
-      organizer: true,
+    select: {
+      title: true,
+      time: true,
+      organizerId: true,
     },
   });
 }
@@ -60,7 +62,10 @@ export function updateEvent(
 
 export function getAllEventsWithOrganizer(): Promise<Event[]> {
   return prisma.event.findMany({
-    include: {
+    select: {
+      id: true,
+      category: true,
+      organizerId: false,
       organizer: {
         select: {
           name: true,
