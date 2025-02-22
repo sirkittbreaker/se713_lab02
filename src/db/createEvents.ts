@@ -73,5 +73,23 @@ export async function createEvents() {
       },
     });
   }
+  const chiangMaiOrg = await prisma.organizer.create({
+    data: {
+      name: "Chiang Mai",
+    },
+  });
+
+  const cmuOrg = await prisma.organizer.create({
+    data: {
+      name: "Chiang Mai Uniersity",
+    },
+  });
+
+  const camtOrg = await prisma.organizer.create({
+    data: {
+      name: "CAMT",
+    },
+  });
+
   console.log("Database has been initialized with events");
 }
