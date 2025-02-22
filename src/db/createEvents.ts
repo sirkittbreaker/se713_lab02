@@ -104,12 +104,24 @@ export async function createEvents() {
     },
   });
 
-  const responseEvents2 = await prisma.event.findMany({
-    include: {
-      organizer: true,
-    },
-  });
-  console.log(responseEvents2);
+  addOrganizer(responseEvents[1].id, chiangMaiOrg.id);
+  addOrganizer(responseEvents[2].id, cmuOrg.id);
+  addOrganizer(responseEvents[3].id, chiangMaiOrg.id);
+  addOrganizer(responseEvents[4].id, camtOrg.id);
+  addOrganizer(responseEvents[5].id, camtOrg.id);
 
   console.log("Database has been initialized with events");
+}
+
+async function addOrganizer(eventId: number, organizerId: number) {
+  await prisma.event.update({
+    where: { id: eventId },
+    data: {
+      organizer: {
+        connect: {
+          id: organizerId,
+        },
+      },
+    },
+  });
 }
