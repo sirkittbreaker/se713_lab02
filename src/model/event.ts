@@ -9,5 +9,5 @@ export interface Event {
   date: string;
   time: string;
   petAllowed: boolean;
-  organizer: organizer;
+  organizer?: organizer | null;
 }

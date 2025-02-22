@@ -8,7 +8,7 @@ export function getEventByCategory(category: string) {
 }
 
 export function getAllEvents() {
-  return repo.getAllEvents();
+  return repo.getAllEventsWithOrganizer();
 }
 
 export function getEventById(id: number) {

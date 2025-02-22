@@ -20,6 +20,9 @@ export function getEventById(id: number): Promise<Event | null> {
     where: {
       id: id,
     },
+    include: {
+      organizer: true,
+    },
   });
 }
 
@@ -33,7 +36,9 @@ export function addEvent(newEvent: Event): Promise<Event> {
       date: newEvent.date,
       time: newEvent.time,
       petAllowed: newEvent.petAllowed,
-      organizer: newEvent.organizer,
+      organizer: newEvent.organizer
+        ? { connect: { id: newEvent.organizer.id } }
+        : undefined,
     },
   });
 }
@@ -42,12 +47,24 @@ export function updateEvent(
   id: number,
   updatedEvent: Partial<Event>
 ): Promise<Event> {
+  const { id: _, ...data } = updatedEvent; // ไม่ส่ง id ในข้อมูลที่จะอัพเดท
   return prisma.event.update({
     where: {
       id: id,
     },
     data: {
-      ...updatedEvent,
+      ...data,
+      organizer: updatedEvent.organizer
+        ? { connect: { id: updatedEvent.organizer.id } }
+        : undefined,
+    },
+  });
+}
+
+export function getAllEventsWithOrganizer(): Promise<Event[]> {
+  return prisma.event.findMany({
+    include: {
+      organizer: true,
     },
   });
 }
