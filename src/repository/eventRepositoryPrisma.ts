@@ -29,16 +29,13 @@ export function getEventById(id: number): Promise<Event | null> {
 export function addEvent(newEvent: Event): Promise<Event> {
   return prisma.event.create({
     data: {
-      category: newEvent.category,
-      title: newEvent.title,
-      description: newEvent.description,
-      location: newEvent.location,
-      date: newEvent.date,
-      time: newEvent.time,
-      petAllowed: newEvent.petAllowed,
-      organizer: newEvent.organizer
-        ? { connect: { id: newEvent.organizer.id } }
-        : undefined,
+      category: newEvent.category || "",
+      title: newEvent.title || "",
+      description: newEvent.description || "",
+      location: newEvent.location || "",
+      date: newEvent.date || "",
+      time: newEvent.time || "",
+      petAllowed: newEvent.petAllowed || false,
     },
   });
 }
@@ -47,7 +44,7 @@ export function updateEvent(
   id: number,
   updatedEvent: Partial<Event>
 ): Promise<Event> {
-  const { id: _, ...data } = updatedEvent; // ไม่ส่ง id ในข้อมูลที่จะอัพเดท
+  const { id: _, organizerId: __, ...data } = updatedEvent; // ไม่ส่ง id ในข้อมูลที่จะอัพเดท
   return prisma.event.update({
     where: {
       id: id,
